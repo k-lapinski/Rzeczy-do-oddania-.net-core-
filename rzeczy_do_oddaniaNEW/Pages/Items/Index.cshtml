@@ -15,8 +15,7 @@
     <a asp-page="Create">Create New</a>
      } 
         else {
-            <h1 class="display-4">ELOO</h1>
-            <p>Strona startowa</p>
+          
         }
 
 </p>
@@ -71,11 +70,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Category)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
+            
 
-            <td> <img src="../Img/R.jpg" height="60" width="60" asp-append-version="true" /></td>
+            <td> <img src="~/Img/@item.Image" height="200" width="200" asp-append-version="true" /></td>
             
             @if (SignInManager.IsSignedIn(User)) {
             <td>
@@ -85,8 +82,7 @@
             </td>
             } 
         else {
-            <h1 class="display-4">ELOO</h1>
-            <p>Strona startowa</p>
+            
         }
 
         </tr>

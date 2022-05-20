@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -6,10 +6,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-rzeczy_do_oddaniaNEW-9A3E723D-D292-4C41-8CDE-CED2DC1CBA0C</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Include="Img\carfast.png" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.4" />
@@ -29,7 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Img\" />
+    <Folder Include="wwwroot\Img\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Img\carfast.png" />
+    <None Include="wwwroot\Img\first.jpg" />
+    <None Include="wwwroot\Img\R.jpg" />
   </ItemGroup>
 
 </Project>

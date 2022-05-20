@@ -44,6 +44,7 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
             if (!string.IsNullOrEmpty(ItemCategory))
             {
                 items = items.Where(x => x.Category == ItemCategory);
+   
             }
             Categories = new SelectList(await genreQuery.Distinct().ToListAsync());
             Item = await items.ToListAsync();
