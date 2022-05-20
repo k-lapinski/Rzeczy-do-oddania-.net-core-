@@ -1,0 +1,96 @@
+﻿@page
+@model rzeczy_do_oddaniaNEW.Pages.Items.IndexModel
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Index";
+
+    
+
+}
+
+<h1>Index</h1>
+
+<p> @if (SignInManager.IsSignedIn(User)) {
+    <a asp-page="Create">Create New</a>
+     } 
+        else {
+            <h1 class="display-4">ELOO</h1>
+            <p>Strona startowa</p>
+        }
+
+</p>
+<form>
+    <p>
+        <select asp-for="ItemCategory" asp-items="Model.Categories">
+            <option value="">All</option>
+        </select>
+        Tytuł: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Szukaj" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].ReleaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].Image)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Item) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+
+            <td> <img src="../Img/R.jpg" height="60" width="60" asp-append-version="true" /></td>
+            
+            @if (SignInManager.IsSignedIn(User)) {
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+            } 
+        else {
+            <h1 class="display-4">ELOO</h1>
+            <p>Strona startowa</p>
+        }
+
+        </tr>
+}
+
+    </tbody>
+</table>
