@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -37,9 +39,15 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
             }
 
             _context.Item.Add(Item);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);// will give the user's userId
+            Item.userID = userId;
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }
+
+
+       
+
     }
 }

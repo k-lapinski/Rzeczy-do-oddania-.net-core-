@@ -12,7 +12,8 @@
 <h1>Index</h1>
 
 <p> @if (SignInManager.IsSignedIn(User)) {
-    <a asp-page="Create">Create New</a>
+  <p>  @((await UserManager.GetUserAsync(User)).Email)</p>
+    <a asp-page="Create"> Create New</a>
      } 
         else {
           

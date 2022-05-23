@@ -20,5 +20,7 @@ namespace rzeczy_do_oddaniaNEW.Pages.Models
         public string Category { get; set; } = string.Empty;
         [Display(Name = "Zdjęcie")]
         public string Image { get; set; } = string.Empty;
+
+        public string userID { get; set; } = string.Empty;
     }
 }
