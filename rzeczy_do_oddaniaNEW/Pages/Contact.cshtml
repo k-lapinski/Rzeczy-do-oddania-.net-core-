@@ -1,0 +1,35 @@
+﻿@page
+@model rzeczy_do_oddaniaNEW.Pages.ContactModel
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+}
+@if (SignInManager.IsSignedIn(User)) {
+<form method="post">
+
+    <table>
+        <tr>
+        <td>To</td>
+        <td><input type="text" asp-for="sendmail.To" placeholder="Enter Email Id ... " /></td>
+        </tr>
+         <tr>
+        <td>Subject</td>
+        <td><input type="text" asp-for="sendmail.Subject" placeholder="Enter Subject ... " /></td>
+        </tr>
+         <tr>
+        <td>Body</td>
+        <td><input type="text" asp-for="sendmail.Body" placeholder="Enter Body ... " /></td>
+        </tr>
+        <tr>
+       
+        <td><input type="submit" class="btn-success" value="Send mail ... " /></td>
+        </tr>
+
+    </table>
+
+</form>
+
+ } 
+        else {
+            
+        }

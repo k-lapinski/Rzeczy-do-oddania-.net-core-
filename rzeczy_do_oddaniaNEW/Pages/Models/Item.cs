@@ -6,11 +6,17 @@ namespace rzeczy_do_oddaniaNEW.Pages.Models
     {   [Key]
         public int ID { get; set; }
         [Display(Name = "Tytuł")]
+        [Required]
+        [MaxLength(100)]
         public string Title { get; set; } = string.Empty;
         [Display(Name = "Opis")]
+        [Required]
+        [MaxLength(300)]
         public string Description { get; set; } = string.Empty;
 
         [Display(Name = "Adres")]
+        [Required]
+        [MaxLength(300)]
         public string Address { get; set; } = string.Empty;
 
         [Display(Name = "Data zakończenia")]
@@ -19,6 +25,7 @@ namespace rzeczy_do_oddaniaNEW.Pages.Models
         [Display(Name = "Kategoria")]
         public string Category { get; set; } = string.Empty;
         [Display(Name = "Zdjęcie")]
+        [MaxLength(300)]
         public string Image { get; set; } = string.Empty;
 
         public string userID { get; set; } = string.Empty;
