@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace rzeczy_do_oddaniaNEW.Pages.Models
 {
@@ -29,5 +30,11 @@ namespace rzeczy_do_oddaniaNEW.Pages.Models
         public string Image { get; set; } = string.Empty;
 
         public string userID { get; set; } = string.Empty;
+
+        public virtual ICollection<IdentityUser>? Reservations { get; set; }
+      
+
+
+
     }
 }
