@@ -12,7 +12,27 @@ namespace rzeczy_do_oddaniaNEW.Data
         {
         }
         public DbSet<rzeczy_do_oddaniaNEW.Pages.Models.Item>? Item { get; set; }
-        public DbSet<IdentityUser> Reservation { get; set; }
+        public DbSet<rzeczy_do_oddaniaNEW.Pages.Models.ApplicationUser>? applicationUsers { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            //dodajemy parę kluczy do tabeli pośredniczącej do relacjimany to many
+
+            builder.Entity<Reservation>()
+            .HasKey(pg => new { pg.ItemId, pg.UsersID });
+            //w tabeli posredniczacej PersonGroup
+            builder.Entity<Reservation>()
+            .HasOne<Item>(pg => pg.Item) // dla jednej osoby
+            .WithMany(p => p.Reservations) // jest wiele PersonGroups
+            .HasForeignKey(p => p.ItemId); // a powizanie jestrealizowane przez klucz obcy PersonId
+
+            //w tabeli posredniczacej PersonGroup
+            builder.Entity<Reservation>()
+            .HasOne<ApplicationUser>(pg => pg.User) // dla jednej grupy
+            .WithMany(g => g.Reservations) // jest wiele PersonGroups
+            .HasForeignKey(g => g.UsersID); // a powizanie jestrealizowane przez klucz obcy GroupId
+
+        }
 
 
 

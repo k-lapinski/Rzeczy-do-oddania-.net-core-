@@ -41,6 +41,7 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
             _context.Item.Add(Item);
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);// will give the user's userId
             Item.userID = userId;
+            
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

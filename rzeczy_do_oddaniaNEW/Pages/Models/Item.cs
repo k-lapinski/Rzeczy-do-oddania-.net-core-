@@ -31,8 +31,9 @@ namespace rzeczy_do_oddaniaNEW.Pages.Models
 
         public string userID { get; set; } = string.Empty;
 
-        public virtual ICollection<IdentityUser>? Reservations { get; set; }
-      
+        public ICollection<Reservation>? Reservations { get; set; }
+
+
 
 
 

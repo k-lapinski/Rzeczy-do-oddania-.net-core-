@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -26,8 +27,13 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
         public SelectList Categories { get; set; }
         [BindProperty(SupportsGet = true)]
         public string ItemCategory { get; set; }
+
+        public Reservation Reservations { get; set; } = default!;
+
         public async Task OnGetAsync()
         {
+
+
             // Use LINQ to get list of genres.
             IQueryable<string> genreQuery = from m in _context.Item
                                             orderby m.Category
@@ -44,10 +50,40 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
             if (!string.IsNullOrEmpty(ItemCategory))
             {
                 items = items.Where(x => x.Category == ItemCategory);
-   
+
             }
             Categories = new SelectList(await genreQuery.Distinct().ToListAsync());
+            
             Item = await items.ToListAsync();
         }
+
+  
+        
+        public async Task<PageResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid || _context.Item == null || Item == null)
+            {
+                return Page();
+            }
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            
+            Reservations.UsersID = userId;
+          
+
+            foreach (Item items in Item)
+            {
+                Reservations.ItemId = items.ID;
+            }
+         
+
+            await _context.SaveChangesAsync();
+
+            return Page();
+
+        }
+       
+
+
     }
 }

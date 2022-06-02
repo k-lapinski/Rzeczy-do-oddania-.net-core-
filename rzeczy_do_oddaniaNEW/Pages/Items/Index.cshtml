@@ -4,7 +4,6 @@
 @inject UserManager<IdentityUser> UserManager
 @{
     ViewData["Title"] = "Index";
-
     
 
 }
@@ -20,6 +19,7 @@
         }
 
 </p>
+
 <form>
     <p>
         <select asp-for="ItemCategory" asp-items="Model.Categories">
@@ -50,6 +50,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Item[0].Image)
             </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -74,11 +75,16 @@
             
 
             <td> <img src="~/Img/@item.Image" height="200" width="200" asp-append-version="true" /></td>
-            
+            <td>
+                @Html.DisplayFor(modelItem => item.Reservations);
+             <form method="post">
+             <input asp-page="" type="submit" value="Reserve" class="btn btn-primary" />
+          </form>
+            </td>
             @if (SignInManager.IsSignedIn(User)) {
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> 
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> 
                 <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
             </td>
             } 
@@ -88,6 +94,7 @@
 
         </tr>
 }
+ 
 
     </tbody>
 </table>
