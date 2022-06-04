@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -43,13 +44,21 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+
+            var OwnerID = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Item).State = EntityState.Modified;
+            if (OwnerID == Item.userID)
+            {
 
+                _context.Attach(Item).State = EntityState.Modified;
+
+            }
+
+            else { return NotFound(); }
             try
             {
                 await _context.SaveChangesAsync();

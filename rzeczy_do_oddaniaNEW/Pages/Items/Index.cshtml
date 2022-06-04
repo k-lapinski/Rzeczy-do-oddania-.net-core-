@@ -50,6 +50,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Item[0].Image)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].Reservations)
+            </th>
             
             <th></th>
         </tr>
@@ -76,9 +79,10 @@
 
             <td> <img src="~/Img/@item.Image" height="200" width="200" asp-append-version="true" /></td>
             <td>
-                @Html.DisplayFor(modelItem => item.Reservations);
+                @Html.DisplayFor(items => items.Reservation.ItemId)
+                 @Html.DisplayFor(items => items.Reservation.UsersID)
              <form method="post">
-             <input asp-page="" type="submit" value="Reserve" class="btn btn-primary" />
+             <input asp-page="@item.Reservations" type="submit" value="Reserve" class="btn btn-primary" />
           </form>
             </td>
             @if (SignInManager.IsSignedIn(User)) {
@@ -94,6 +98,9 @@
 
         </tr>
 }
+
+
+
  
 
     </tbody>

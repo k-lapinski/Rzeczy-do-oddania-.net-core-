@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -18,7 +19,7 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
         {
             _context = context;
         }
-
+       
         [BindProperty]
       public Item Item { get; set; } = default!;
 
@@ -42,8 +43,13 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
             return Page();
         }
 
+    
         public async Task<IActionResult> OnPostAsync(int? id)
         {
+            var OwnerID = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+
+
             if (id == null || _context.Item == null)
             {
                 return NotFound();
@@ -53,10 +59,18 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
             if (item != null)
             {
                 Item = item;
+
+                if (OwnerID == Item.userID) { 
+
                 _context.Item.Remove(Item);
+                }
+
+                else { return NotFound(); }
+
                 await _context.SaveChangesAsync();
             }
 
+           
             return RedirectToPage("./Index");
         }
     }

@@ -28,7 +28,7 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
         [BindProperty(SupportsGet = true)]
         public string ItemCategory { get; set; }
 
-        public Reservation Reservations { get; set; } = default!;
+        
 
         public async Task OnGetAsync()
         {
@@ -57,32 +57,34 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
             Item = await items.ToListAsync();
         }
 
-  
-        
-        public async Task<PageResult> OnPostAsync()
+
+
+        [BindProperty]
+        public Reservation Reservation { get; set; }
+
+
+        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+        public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || _context.Item == null || Item == null)
+            if (!ModelState.IsValid || _context.Reservation == null || Reservation == null)
             {
                 return Page();
             }
-
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            _context.Reservation.Add(Reservation);
+            var ItemIDD = 0;
+            var OwnerID = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             
-            Reservations.UsersID = userId;
-          
-
-            foreach (Item items in Item)
-            {
-                Reservations.ItemId = items.ID;
+            Reservation.UsersID = OwnerID;
+            foreach (Item items in Item) { 
+                ItemIDD = items.ID;
             }
-         
 
+            
             await _context.SaveChangesAsync();
 
-            return Page();
-
+            return RedirectToPage("./Index");
         }
-       
+
 
 
     }

@@ -33,6 +33,7 @@ namespace rzeczy_do_oddaniaNEW.Data
             .HasForeignKey(g => g.UsersID); // a powizanie jestrealizowane przez klucz obcy GroupId
 
         }
+        public DbSet<rzeczy_do_oddaniaNEW.Pages.Models.Reservation>? Reservation { get; set; }
 
 
 
