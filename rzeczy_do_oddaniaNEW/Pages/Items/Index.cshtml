@@ -82,7 +82,9 @@
                 @Html.DisplayFor(items => items.Reservation.ItemId)
                  @Html.DisplayFor(items => items.Reservation.UsersID)
              <form method="post">
-             <input asp-page="@item.Reservations" type="submit" value="Reserve" class="btn btn-primary" />
+                 <input type="hidden" asp-for="@item.ID" />
+        <input type="submit" value="Reservation" class="btn btn-danger" /> 
+             
           </form>
             </td>
             @if (SignInManager.IsSignedIn(User)) {

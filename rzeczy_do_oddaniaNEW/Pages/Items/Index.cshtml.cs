@@ -28,11 +28,11 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
         [BindProperty(SupportsGet = true)]
         public string ItemCategory { get; set; }
 
-        
 
+       
         public async Task OnGetAsync()
         {
-
+           
 
             // Use LINQ to get list of genres.
             IQueryable<string> genreQuery = from m in _context.Item
