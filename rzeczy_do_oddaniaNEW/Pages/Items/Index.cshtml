@@ -1,4 +1,5 @@
 ﻿@page
+@using System.Security.Claims
 @model rzeczy_do_oddaniaNEW.Pages.Items.IndexModel
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
@@ -88,10 +89,16 @@
           </form>
             </td>
             @if (SignInManager.IsSignedIn(User)) {
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> 
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> 
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                    <td>
+
+                        @if (item.userID == User.FindFirstValue(ClaimTypes.NameIdentifier))
+                        {
+                            <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> 
+                            <a asp-page="./Details" asp-route-id="@item.ID">Details</a> 
+                            <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+
+                }
+                else {}
             </td>
             } 
         else {
