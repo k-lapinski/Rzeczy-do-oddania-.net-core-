@@ -85,8 +85,8 @@
             <td> <img src="~/Img/@item.Image" height="200" width="200" asp-append-version="true" /></td>
             <td>
              <form method="post">
-                <input asp-for="@item.ID" type="submit" value="Reservation" class="btn btn-danger" /> 
-             
+                 <input type="hidden" asp-for="@item.ID" />        
+                 <input type="submit" value="Reservation" class="btn btn-danger" />  
           </form>
             </td>
             @if (SignInManager.IsSignedIn(User)) {
