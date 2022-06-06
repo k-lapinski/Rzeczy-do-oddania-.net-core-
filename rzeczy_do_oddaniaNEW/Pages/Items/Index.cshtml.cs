@@ -57,5 +57,13 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
             Item = await items.ToListAsync();
         }
 
+        public async Task OnPostAsync()
+        {
+            foreach(var item in Item)
+            {
+                item.Reservation = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            }
+        }
+
     }
 }
