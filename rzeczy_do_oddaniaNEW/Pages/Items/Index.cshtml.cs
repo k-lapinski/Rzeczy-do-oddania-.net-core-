@@ -59,10 +59,13 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
 
         public async Task OnPostAsync()
         {
-            foreach(var item in Item)
+            foreach (var item in Item)
             {
                 item.Reservation = User.FindFirstValue(ClaimTypes.NameIdentifier);
             }
+
+            _context.Attach(Item).State = EntityState.Modified;        
+            await _context.SaveChangesAsync();
         }
 
     }
