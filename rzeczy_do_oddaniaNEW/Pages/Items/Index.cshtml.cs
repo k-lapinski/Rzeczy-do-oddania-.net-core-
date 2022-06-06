@@ -57,15 +57,19 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
             Item = await items.ToListAsync();
         }
 
-        public async Task OnPostAsync()
+        public async Task OnPostAsync(int id)
         {
+            
             Item = await _context.Item.ToListAsync();
+
             foreach (var item in Item)
             {
-                item.Reservation = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                item.Reservation = User.FindFirstValue(ClaimTypes.Email);
+                break;
             }
 
-            //_context.Attach(Item).State = EntityState.Modified;        
+            //_context.Attach(Item).State = EntityState.Modified;
+
             await _context.SaveChangesAsync();
         }
 
