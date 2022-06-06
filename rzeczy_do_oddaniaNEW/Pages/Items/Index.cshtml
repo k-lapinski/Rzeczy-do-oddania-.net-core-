@@ -51,9 +51,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Item[0].Image)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Item[0].Reservations)
-            </th>
             
             <th></th>
         </tr>
@@ -80,8 +77,6 @@
 
             <td> <img src="~/Img/@item.Image" height="200" width="200" asp-append-version="true" /></td>
             <td>
-                @Html.DisplayFor(items => items.Reservation.ItemId)
-                 @Html.DisplayFor(items => items.Reservation.UsersID)
              <form method="post">
                  <input type="hidden" asp-for="@item.ID" />
         <input type="submit" value="Reservation" class="btn btn-danger" /> 

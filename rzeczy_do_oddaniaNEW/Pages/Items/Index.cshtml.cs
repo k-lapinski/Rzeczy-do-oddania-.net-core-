@@ -57,35 +57,5 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
             Item = await items.ToListAsync();
         }
 
-
-
-        [BindProperty]
-        public Reservation Reservation { get; set; }
-
-
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid || _context.Reservation == null || Reservation == null)
-            {
-                return Page();
-            }
-            _context.Reservation.Add(Reservation);
-            var ItemIDD = 0;
-            var OwnerID = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            
-            Reservation.UsersID = OwnerID;
-            foreach (Item items in Item) { 
-                ItemIDD = items.ID;
-            }
-
-            
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
-        }
-
-
-
     }
 }
