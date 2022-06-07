@@ -32,11 +32,13 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
             }
 
             var item =  await _context.Item.FirstOrDefaultAsync(m => m.ID == id);
+            
             if (item == null)
             {
                 return NotFound();
             }
             Item = item;
+           
             return Page();
         }
 
@@ -51,14 +53,13 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
                 return Page();
             }
 
-            if (OwnerID == Item.userID)
-            {
 
-                _context.Attach(Item).State = EntityState.Modified;
+            Item.userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            _context.Attach(Item).State = EntityState.Modified;
 
-            }
+         
 
-            else { return NotFound(); }
+        
             try
             {
                 await _context.SaveChangesAsync();
