@@ -58,26 +58,25 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
         }
 
 
-        public async Task OnPostAsync(int id)
+        public async Task OnPostAsync(int valuebtn)
         {
 
             Item = await _context.Item.ToListAsync();
             
-            Item[id].Reservation = User.FindFirstValue(ClaimTypes.Email);
-        
            
-          //  foreach (Item c in Item)
-           // {
 
-            //  if (c.ID == id) { 
 
-           // c[id].Reservation = this.User.FindFirstValue(ClaimTypes.Email);
+            foreach (Item c in Item)
+            {
 
-            //    }
+                if (c.ID == valuebtn)
+                {
+                    c.Reservation = User.FindFirstValue(ClaimTypes.Email);
+                }
+                await _context.SaveChangesAsync();
+            }
 
-         //  }
-
-            await _context.SaveChangesAsync();
+          
         }
 
     }

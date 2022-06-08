@@ -12328,3 +12328,7 @@ th {
 .card-title, .card-header {
     color: inherit;
 }
+
+.grayColor {
+    background-color: black;
+}

@@ -85,11 +85,10 @@
             <td> <img src="~/Img/@item.Image" height="200" width="200" asp-append-version="true" /></td>
             @if (SignInManager.IsSignedIn(User)) {
             <td>
-             @if(item.userID != User.FindFirstValue(ClaimTypes.NameIdentifier))
+             @if(item.userID != User.FindFirstValue(ClaimTypes.NameIdentifier) && string.IsNullOrEmpty(item.Reservation))
                         { 
                 <form method="post"> 
-                        <input type="text" type="hidden" asp-for="@item.ID" value="@item.ID" readonly/>        
-                 <input type="submit" value="Reservation" class="btn btn-danger" />  
+                 <button class="btn btn-primary" type="submit" name="valuebtn" value="@item.ID">Reservation</button> 
           </form>}
             </td>
            
