@@ -71,6 +71,7 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
                 // if (item.ID == id) { 
                 item.Reservation = User.FindFirstValue(ClaimTypes.Email);
                 //  }
+               
 
             }
 
