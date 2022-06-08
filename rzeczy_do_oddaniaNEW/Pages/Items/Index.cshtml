@@ -77,7 +77,7 @@
                 @Html.DisplayFor(modelItem => item.Category)
             </td
                                         <td>
-                                 @Html.DisplayFor(modelItem => item.Reservation)
+                                 <br>
                             </td>
             
             
@@ -88,7 +88,7 @@
              @if(item.userID != User.FindFirstValue(ClaimTypes.NameIdentifier))
                         { 
                 <form method="post"> 
-                        <input type="hidden" asp-for="@item.Reservation" value="@item.ID" />        
+                        <input type="text" type="hidden" asp-for="@item.ID" value="@item.ID" readonly/>        
                  <input type="submit" value="Reservation" class="btn btn-danger" />  
           </form>}
             </td>

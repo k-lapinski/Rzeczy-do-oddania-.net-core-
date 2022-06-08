@@ -60,20 +60,22 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
 
         public async Task OnPostAsync(int id)
         {
-            
+
             Item = await _context.Item.ToListAsync();
+            
+            Item[id].Reservation = User.FindFirstValue(ClaimTypes.Email);
+        
+           
+          //  foreach (Item c in Item)
+           // {
 
+            //  if (c.ID == id) { 
 
+           // c[id].Reservation = this.User.FindFirstValue(ClaimTypes.Email);
 
-            foreach (var item in Item)
-            {
+            //    }
 
-                // if (item.ID == id) { 
-                item.Reservation = User.FindFirstValue(ClaimTypes.Email);
-                //  }
-               
-
-            }
+         //  }
 
             await _context.SaveChangesAsync();
         }
