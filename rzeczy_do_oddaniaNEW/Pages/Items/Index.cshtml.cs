@@ -25,6 +25,7 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
         public SelectList Categories { get; set; }
+        public List<Category> Category { get; set; }
         [BindProperty(SupportsGet = true)]
         public string ItemCategory { get; set; }
 
@@ -36,8 +37,8 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
 
             // Use LINQ to get list of genres.
             IQueryable<string> genreQuery = from m in _context.Item
-                                            orderby m.Category
-                                            select m.Category;
+                                            orderby m.Category.CategoryName
+                                            select m.Category.CategoryName;
 
             var items = from m in _context.Item
                         select m;
@@ -49,12 +50,20 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
 
             if (!string.IsNullOrEmpty(ItemCategory))
             {
-                items = items.Where(x => x.Category == ItemCategory);
+                items = items.Where(x => x.Category.CategoryName == ItemCategory);
 
             }
             Categories = new SelectList(await genreQuery.Distinct().ToListAsync());
             
             Item = await items.ToListAsync();
+
+            foreach (var item in Item)
+            {
+                this.Category = (from c in _context.Categories where c.CategoryId == item.CategoryFk select c).ToList();
+                item.Category = Category[0];
+                Category.Remove(Category[0]);
+            }
+
         }
 
 
@@ -62,14 +71,14 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
         {
 
             Item = await _context.Item.ToListAsync();
-            
+
            
 
 
             foreach (Item c in Item)
             {
 
-                if (c.ID == valuebtn)
+                if (c.ItemId == valuebtn)
                 {
                     c.Reservation = User.FindFirstValue(ClaimTypes.Email);
                 }

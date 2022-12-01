@@ -23,7 +23,8 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
 
         [BindProperty]
         public Item Item { get; set; } = default!;
-
+        
+        //public List<Category> Category { get; set; } = default!;
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.Item == null)
@@ -31,7 +32,7 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
                 return NotFound();
             }
 
-            var item =  await _context.Item.FirstOrDefaultAsync(m => m.ID == id);
+            var item =  await _context.Item.FirstOrDefaultAsync(m => m.ItemId == id);
             
             if (item == null)
             {
@@ -39,6 +40,9 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
             }
             Item = item;
            
+
+
+
             return Page();
         }
 
@@ -66,7 +70,7 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ItemExists(Item.ID))
+                if (!ItemExists(Item.ItemId))
                 {
                     return NotFound();
                 }
@@ -81,7 +85,7 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
 
         private bool ItemExists(int id)
         {
-          return (_context.Item?.Any(e => e.ID == id)).GetValueOrDefault();
+          return (_context.Item?.Any(e => e.ItemId == id)).GetValueOrDefault();
         }
     }
 }

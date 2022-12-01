@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace rzeczy_do_oddaniaNEW.Pages.Models
 {
     public class Item
     {   [Key]
-        public int ID { get; set; }
+        public int ItemId { get; set; }
         [Display(Name = "Title")]
         [Required]
         [MaxLength(100)]
@@ -24,7 +25,11 @@ namespace rzeczy_do_oddaniaNEW.Pages.Models
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
         [Display(Name = "Category")]
-        public string Category { get; set; } = string.Empty;
+
+        [ForeignKey("Category")]
+        public int CategoryFk { get; set; }
+        public Category Category { get; set; }
+
         [Display(Name = "Photo")]
         [MaxLength(300)]
         public string Image { get; set; } = string.Empty;

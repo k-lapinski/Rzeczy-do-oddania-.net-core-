@@ -12332,3 +12332,6 @@ th {
 .grayColor {
     background-color: black;
 }
+.bg-white {
+    background-color: ##c1c7c3 !important;
+}

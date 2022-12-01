@@ -20,13 +20,21 @@ namespace rzeczy_do_oddaniaNEW.Pages.Owner
         }
 
         public IList<Item> Item { get;set; } = default!;
-
+        public List<Category> Category { get; set; } = default!;
         public async Task OnGetAsync()
         {
             if (_context.Item != null)
             {
                 
+
                 Item = await _context.Item.ToListAsync();
+               
+                foreach (var item in Item)
+                {
+                    this.Category = (from c in _context.Categories where c.CategoryId == item.CategoryFk select c).ToList();
+                    item.Category = Category[0];
+                    Category.Remove(Category[0]);
+                }
             }
         }
     }

@@ -30,7 +30,7 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
                 return NotFound();
             }
 
-            var item = await _context.Item.FirstOrDefaultAsync(m => m.ID == id);
+            var item = await _context.Item.FirstOrDefaultAsync(m => m.ItemId == id);
 
             if (item == null)
             {

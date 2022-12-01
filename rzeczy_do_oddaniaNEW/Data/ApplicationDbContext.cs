@@ -14,7 +14,7 @@ namespace rzeczy_do_oddaniaNEW.Data
         }
         public DbSet<rzeczy_do_oddaniaNEW.Pages.Models.Item>? Item { get; set; }
         public DbSet<rzeczy_do_oddaniaNEW.Pages.Models.ApplicationUser>? applicationUsers { get; set; }
-
+        public DbSet<Category>? Categories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

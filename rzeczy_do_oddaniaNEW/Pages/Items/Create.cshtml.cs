@@ -28,19 +28,28 @@ namespace rzeczy_do_oddaniaNEW.Pages.Items
 
         [BindProperty]
         public Item Item { get; set; } = default!;
-        
+        [BindProperty]
+        public Category Category { get; set; } = default!;
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Item == null || Item == null)
+            if ( _context.Item == null || Item == null || _context.Categories == null || Category == null)
             {
                 return Page();
             }
 
-            _context.Item.Add(Item);
+     
+            _context.Categories.Add(Category);
+            
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);// will give the user's userId
             Item.userID = userId;
+            Item.Category = Category;
+            _context.Item.Add(Item);
+           
+
+        
             
             await _context.SaveChangesAsync();
 

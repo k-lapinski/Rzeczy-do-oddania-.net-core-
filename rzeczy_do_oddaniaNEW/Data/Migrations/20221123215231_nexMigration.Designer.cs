@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using rzeczy_do_oddaniaNEW.Data;
 
@@ -11,9 +12,10 @@ using rzeczy_do_oddaniaNEW.Data;
 namespace rzeczy_do_oddaniaNEW.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221123215231_nexMigration")]
+    partial class nexMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,35 +234,35 @@ namespace rzeczy_do_oddaniaNEW.Data.Migrations
 
             modelBuilder.Entity("rzeczy_do_oddaniaNEW.Pages.Models.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CategoryId");
+                    b.HasKey("ID");
 
                     b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("rzeczy_do_oddaniaNEW.Pages.Models.Item", b =>
                 {
-                    b.Property<int>("ItemId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ItemId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
-                    b.Property<int>("CategoryFk")
+                    b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -289,9 +291,9 @@ namespace rzeczy_do_oddaniaNEW.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ItemId");
+                    b.HasKey("ID");
 
-                    b.HasIndex("CategoryFk");
+                    b.HasIndex("CategoryID");
 
                     b.ToTable("Item");
                 });
@@ -358,7 +360,7 @@ namespace rzeczy_do_oddaniaNEW.Data.Migrations
                 {
                     b.HasOne("rzeczy_do_oddaniaNEW.Pages.Models.Category", "Category")
                         .WithMany("Items")
-                        .HasForeignKey("CategoryFk")
+                        .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
